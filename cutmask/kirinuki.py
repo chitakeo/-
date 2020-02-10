@@ -50,24 +50,7 @@ def main():
     return img_alpha
 
 ###########
-"""
-    tmp_img, contours, _ = cv2.findContours(
-        result_morphing, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Contour approximation
-    approx = approx_contour(contours)
-
-    # Contour line drawing
-    cp_org_img_for_draw = np.copy(org_img)
-    drawing_edge(org_img, approx, cp_org_img_for_draw)
-
-    # Setting for display
-    setting_for_display()
-    # Execution display
-    display_result(
-        org_img, h_img, s_img, v_img, hist_s_img,
-        result_bin, result_morphing, cp_org_img_for_draw)
-"""
 def approx_contour(contours):
     ######################################################
     # 輪郭直線近似
