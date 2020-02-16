@@ -1,12 +1,12 @@
 {
-    "": "ピースの画像のディレクトリ",
-    "piece": "/Users/tuhadaiki/画像処理実験/imgfile/piece_img/",
-    "": "パズルの完成形の画像のあるディレクトリ",
-    "Complete": "/Users/tuhadaiki/画像処理実験/imgfile/Complete_puzzle/kumonma.png",
-    "": "ピースの形に切り抜いたものを保存するディレクトリ",
-    "peice_res": "/Users/tuhadaiki/画像処理実験/imgfile/piece_res/",
-    "": "直線検出で使う、線を書き込まれた画像の確認用のディレクトリ。",
-    "line": "/Users/tuhadaiki/画像処理実験/imgfile/line_result/",
-    "": "siftで特徴点マッチングした後に、結果を保存する用のディレクトリ",
-    "matching": "/Users/tuhadaiki/画像処理実験/imgfile/sift_result/"
+    "": "ピースの画像のあるpath",
+    "piece": "path",
+    "": "パズルの完成形の画像のあるpath",
+    "Complete": "path",
+    "": "ピースの形に切り抜いたものを保存するpath",
+    "peice_res": "path",
+    "": "直線検出で線を書き込まれた画像を保存するpath",
+    "line": "path",
+    "": "siftで特徴点マッチングした後に、結果を保存するpath",
+    "matching": "path"
 }
