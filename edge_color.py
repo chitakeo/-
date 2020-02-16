@@ -12,21 +12,16 @@ def main():
     img_zentai = cv2.imread("zentai.jpg")
     
     # 色による判別時使用
-    # average = 0, median = any
+    # average => 0, median => any
     ave_med = 0
-    # 画像の中央値または平均値にかける値
+    
+    # 画像のBGR値の中央値または平均値にかける値
     # low = 0.3 upp = 1.5 くらいがちょうどいいかも 
     low = 0.3
     upp = 1.5
-
-    #画像の平滑化
-    blur_piece = blur(img_piece)
-    blur_zentai = blur(img_zentai)
     
-    #輪郭の抽出
-    edges_piece = make_edge(blur_piece)
-    edges_zentai = make_edge(blur_zentai)
-    
+    # ピースの一部分を使用してマッチングする時に使用 #
+    # 範囲を指定しても特に効果は得られなかったため現在は全範囲を指定しています
     # 対象範囲を切り出し
     height, width, channels = img_piece.shape[:3]
     boxFromX = 0 #対象範囲開始位置 X座標
@@ -75,16 +70,30 @@ def main():
     bgrResult_piece = bgrExtraction(img_piece, bgrLower, bgrUpper)
     bgrResult_zentai = bgrExtraction(img_zentai, bgrLower, bgrUpper)
     
-    #クロージング処理
+    """
+    # エッジによる識別の場合のみ使用
+    # 画像の平滑化
+    blur_piece = blur(img_piece)
+    blur_zentai = blur(img_zentai)
+    
+    # 輪郭の抽出
+    edges_piece = make_edge(blur_piece)
+    edges_zentai = make_edge(blur_zentai)
+    """
+    
+    # クロージング処理
     kernel = np.ones((9,9),np.uint8)
     closing_piece = cv2.morphologyEx(bgrResult_piece, cv2.MORPH_CLOSE, kernel)
     closing_zentai = cv2.morphologyEx(bgrResult_zentai, cv2.MORPH_CLOSE, kernel)
     
+    
+    
+    
     #SIFTによるマッチング
-    #エッジ
+    #エッジでマッチングを行う場合はコメントアウトを外してください
     #sift_matching = matching(edges_piece, edges_zentai)
     
-    #色
+    #色でマッチングを行う場合はコメントアウトを外してください
     sift_matching = matching(bgrResult_piece, bgrResult_zentai)
     
     
@@ -142,13 +151,5 @@ def matching(image1, image2):
     return image3
     
 
-
-
 if __name__ == '__main__':
     main()
-"""
-cv2.namedWindow("image", cv2.WINDOW_NORMAL)
-cv2.imshow('image', edges)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-"""
