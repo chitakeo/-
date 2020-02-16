@@ -6,7 +6,7 @@ import numpy as np
 
 def crop(IMAGE_PATH):
     #サイズ調整用変数(倍率)
-    size = 0.5
+    size = 2000
     # 画像を読み込む。
     src = cv2.imread(IMAGE_PATH)
     # 2値化する。ここで画像によってうまく調整
@@ -94,7 +94,10 @@ def crop(IMAGE_PATH):
         img_alpha = cv2.merge(img_bgr+[mask2])#黒枠の透過画像生成
         height = img_alpha.shape[0]
         width = img_alpha.shape[1]
-        img_alpha = cv2.resize(img_alpha , (int(width*size), int(height*size)))
+        if height >= width:
+            img_alpha = cv2.resize(img_alpha , (int(width*size/height), size))
+        else:
+            img_alpha = cv2.resize(img_alpha , (size, int(height*size/width)))
 
         #cv2.imwrite("crop.png",img_alpha)#出力。透過画像は.png形式でないと出力できない。
         return img_alpha
@@ -167,7 +170,10 @@ def crop(IMAGE_PATH):
         img_alpha = cv2.merge(img_bgr+[mask2])#黒枠の透過画像生成
         height = img_alpha.shape[0]
         width = img_alpha.shape[1]
-        img_alpha = cv2.resize(img_alpha , (int(width*size), int(height*size)))
+        if height >= width:
+            img_alpha = cv2.resize(img_alpha , (int(width*size/height), size))
+        else:
+            img_alpha = cv2.resize(img_alpha , (size, int(height*size/width)))
 
         #cv2.imwrite("crop.png",img_alpha)#出力。透過画像は.png形式でないと出力できない。
         return img_alpha
